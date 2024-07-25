@@ -1,7 +1,6 @@
 * {
   margin: 0;
   padding: 0;
-  /* box-sizing: border-box; */
 }
 
 body {
@@ -10,12 +9,18 @@ body {
   color: #fff;
 }
 
+/* Header Navbar */
 .navbar {
   width: 100%;
   position: fixed;
   top: 0;
   left: 0;
   padding: 25px 0;
+}
+
+.container {
+  width: 90%;
+  margin: 0 auto;
 }
 
 .navbar nav {
@@ -41,7 +46,7 @@ body {
 .navbar nav ul li a {
   text-decoration: none;
   color: #fff;
-  font-size: 23px;
+  font-size: 22px;
 }
 
 .navbar nav ul li a:hover {
@@ -59,7 +64,151 @@ body {
   width: 20px;
 }
 
-.container {
+/* Hello Section */
+.main-section {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 100vh;
+}
+
+.main-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   width: 90%;
   margin: 0 auto;
+}
+
+.left {
+  width: 55%;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  padding-left: 30px;
+}
+
+.main-section .left {
+  flex: 6;
+  padding-right: 20px;
+  float: left;
+  justify-items: center;
+  margin-left: 100px;
+}
+
+.main-section .left h1 {
+  font-size: 35px;
+  margin-bottom: 10px;
+}
+
+.main-section .left h2 {
+  font-size: 50px;
+  margin-bottom: 10px;
+}
+
+b {
+  color: black;
+}
+
+.main-section .left p {
+  font-size: 30px;
+}
+
+.right {
+  width: 45%;
+  text-align: right;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.right img {
+  width: 80%;
+  margin-right: 30px;
+  height: auto;
+  border-radius: 10px;
+}
+
+/* Intro section */
+
+.IntroContainer {
+  width: 90%;
+  margin: -10px auto;
+  display: flex;
+}
+
+.left h1 {
+  font-size: 2.6em;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.left p {
+  font-size: 18px;
+  line-height: 1.5;
+}
+
+.myAvtar img {
+  width: 70%;
+  height: 75%;
+  clip-path: ellipse(40% 33%);
+}
+
+/* Contact Section */
+
+.icon-div {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  padding-bottom: 40px;
+}
+.icon-styling {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  text-decoration: none;
+  font-size: x-large;
+  background-color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.icon-color {
+  color: #9679f5;
+}
+
+/* Footer */
+.footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  margin: 0 auto;
+  background-color: black;
+}
+
+.left-f {
+  text-align: left;
+}
+
+.center-f {
+  text-align: center;
+  margin-right: 90px;
+}
+
+.right-f {
+  text-align: right;
+  margin-right: 40px;
+}
+
+.right-f .footer-icon {
+  margin: 0 10px;
+}
+
+.icon-footer-color {
+  color: white;
+  padding-left: 20px;
 }
