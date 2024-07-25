@@ -49,6 +49,10 @@ body {
   font-size: 22px;
 }
 
+.navbar nav ul li i {
+  padding-right: 9px;
+}
+
 .navbar nav ul li a:hover {
   border-bottom: 2px solid #8e44ad;
 }
