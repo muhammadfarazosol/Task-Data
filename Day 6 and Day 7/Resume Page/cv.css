@@ -1,0 +1,126 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background: linear-gradient(120deg, #2980b9, #8e44ad);
+  color: #fff;
+}
+
+/* Header Navbar */
+.navbar {
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  padding: 25px 0;
+  background-color: rgba(0, 0, 0, 0.7);
+}
+
+.container {
+  width: 90%;
+  margin: 0 auto;
+}
+
+.navbar nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.navbar img {
+  width: 75px;
+}
+
+.navbar nav ul {
+  list-style: none;
+  display: flex;
+  justify-content: center;
+}
+
+.navbar nav ul li {
+  margin: 0 15px;
+}
+
+.navbar nav ul li a {
+  text-decoration: none;
+  color: #fff;
+  font-size: 22px;
+}
+
+.navbar nav ul li i {
+  padding-right: 9px;
+}
+
+.navbar nav ul li a:hover {
+  border-bottom: 2px solid #8e44ad;
+}
+
+.github {
+  margin-left: 20px;
+}
+
+.github a {
+  color: white;
+  font-size: 30px;
+  text-decoration: none;
+  width: 20px;
+}
+
+.resume-section {
+  padding: 100px 0;
+  text-align: center;
+}
+
+.resume-btn,
+.download-btn {
+  background-color: #8e44ad;
+  color: #fff;
+  padding: 15px 30px;
+  margin: 20px 0;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 18px;
+}
+
+.resume-preview img {
+  max-width: 100%;
+  height: 700px;
+  margin: 20px 0;
+}
+
+/* Footer */
+.footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  background-color: black;
+  position: fixed;
+  width: 100%;
+  bottom: 0;
+}
+
+.left-f {
+  text-align: left;
+}
+
+.center-f {
+  text-align: center;
+}
+
+.right-f {
+  text-align: right;
+}
+
+.right-f .footer-icon {
+  margin: 0 10px;
+}
+
+.icon-footer-color {
+  color: white;
+  padding-left: 20px;
+}
