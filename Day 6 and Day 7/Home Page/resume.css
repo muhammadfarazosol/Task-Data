@@ -158,6 +158,7 @@ b {
   width: 70%;
   height: 75%;
   clip-path: ellipse(40% 33%);
+  z-index: -1;
 }
 
 /* Contact Section */
