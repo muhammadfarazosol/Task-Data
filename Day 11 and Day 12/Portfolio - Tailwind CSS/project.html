@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Muhammad Faraz - Portfolio</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css"
+      integrity="sha512-5A8nwdMOWrSz20fDsjczgUidUBR8liPYU+WymTZP1lmY9G6Oc7HlZv156XqnsgNUzTyMefFTcsFH/tnJE/+xBg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link rel="icon" type="image/x-icon" href="./images/favicon.png" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap");
+
+      body {
+        font-family: "Inter", sans-serif;
+        background: radial-gradient(
+          circle at 52.1% -29.6%,
+          rgb(144, 17, 105) 0%,
+          rgb(51, 0, 131) 100.2%
+        );
+        color: #fff;
+      }
+
+      b {
+        color: goldenrod;
+      }
+
+      .social-icon:hover {
+        box-shadow: 0 0 30px rgb(144, 17, 105);
+        transform: scale(1.1);
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Header Navbar -->
+    <header class="fixed w-full py-6 bg-opacity-50 backdrop-blur-sm">
+      <div class="container mx-auto flex items-center justify-between">
+        <div class="flex items-center">
+          <a href="./home.html"
+            ><img src="./images/logo.png" alt="Your Logo" class="w-20 ml-10"
+          /></a>
+        </div>
+
+        <div class="hidden md:flex space-x-10 text-lg mx-auto">
+          <ul class="flex space-x-10">
+            <li>
+              <a href="./home.html" class="hover:border-b-2 border-[goldenrod]">
+                <i class="fa fa-home pr-2" aria-hidden="true"></i>Home
+              </a>
+            </li>
+            <li>
+              <a
+                href="./about.html"
+                class="hover:border-b-2 border-[goldenrod]"
+              >
+                <i class="fa fa-user pr-2" aria-hidden="true"></i>About
+              </a>
+            </li>
+            <li>
+              <a
+                href="project.html"
+                class="hover:border-b-2 border-[goldenrod]"
+              >
+                <i class="fa fa-list-alt pr-2" aria-hidden="true"></i>Projects
+              </a>
+            </li>
+            <li>
+              <a
+                href="./resume.html"
+                class="hover:border-b-2 border-[goldenrod]"
+              >
+                <i class="fa fa-file-text-o pr-2" aria-hidden="true"></i>Resume
+              </a>
+            </li>
+          </ul>
+        </div>
+
+        <div class="hidden md:block">
+          <a
+            href="https://github.com/muhammadfarazosol"
+            class="text-white text-3xl mr-10"
+          >
+            <i class="fa fa-github-square" aria-hidden="true"></i>
+          </a>
+        </div>
+
+        <!-- Hamburger Menu for Mobile -->
+        <div class="md:hidden flex items-center">
+          <button id="menu-toggle" class="text-white text-3xl mr-10">
+            <i class="fa fa-bars" aria-hidden="true"></i>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- Projects Section -->
+    <section class="flex flex-col items-center mb-20 pt-20">
+      <div class="text-center">
+        <h1 class="text-4xl my-3"><b>My Projects</b></h1>
+        <h2 class="text-xl font-bold mb-10">Here are my few recent projects</h2>
+        <div
+          class="flex flex-wrap justify-center gap-[100px] max-w-[1200px] mx-auto mb-10"
+        >
+          <div
+            class="rounded-[10px] overflow-hidden w-[280px] transition-transform duration-300 p-[10px] border-2 border-[#fff] hover:-translate-y-[10px]"
+          >
+            <img
+              src="./images/projectPic.jpg"
+              alt="Project 1"
+              class="block mx-auto my-auto w-[calc(100%-20px)] h-[200px] object-contain"
+            />
+            <div class="p-[20px] text-center">
+              <h3 class="m-0 text-base text-white">Clean Sweep Pakistan</h3>
+              <p class="text-[0.7rem] text-white my-2.5">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                Accusamus, odio?
+              </p>
+              <button
+                class="bg-purple-500 text-white hover:bg-[#6f0db6] rounded-[2px] ml-[20%] border-none p-[10px_20px] cursor-pointer text-base flex items-center gap-[10px]"
+              >
+                <i class="fa fa-github"></i>GitHub
+              </button>
+            </div>
+          </div>
+          <div
+            class="rounded-[10px] overflow-hidden w-[280px] transition-transform duration-300 p-[10px] border-2 border-[#fff] hover:-translate-y-[10px]"
+          >
+            <img
+              src="./images/projectPic.jpg"
+              alt="Project 2"
+              class="block mx-auto my-auto w-[calc(100%-20px)] h-[200px] object-contain"
+            />
+            <div class="p-[20px] text-center">
+              <h3 class="m-0 text-base text-white">Chatting App</h3>
+              <p class="text-[0.7rem] text-white my-2.5">
+                Lorem, ipsum dolor sit amet consectetur adipisicing elit.
+                Placeat, nobis.
+              </p>
+              <button
+                class="bg-purple-500 text-white hover:bg-[#6f0db6] rounded-[2px] ml-[20%] border-none p-[10px_20px] cursor-pointer text-base flex items-center gap-[10px]"
+              >
+                <i class="fa fa-github"></i>GitHub
+              </button>
+            </div>
+          </div>
+          <div
+            class="rounded-[10px] overflow-hidden w-[280px] transition-transform duration-300 p-[10px] border-2 border-[#fff] hover:-translate-y-[10px]"
+          >
+            <img
+              src="./images/projectPic.jpg"
+              alt="Project 3"
+              class="block mx-auto my-auto w-[calc(100%-20px)] h-[200px] object-contain"
+            />
+            <div class="p-[20px] text-center">
+              <h3 class="m-0 text-base text-white">E-commerce App</h3>
+              <p class="text-[0.7rem] text-white my-2.5">
+                Lorem ipsum, dolor sit amet consectetur adipisicing elit.
+                Maiores, nobis.
+              </p>
+              <button
+                class="bg-purple-500 text-white hover:bg-[#6f0db6] rounded-[2px] ml-[20%] border-none p-[10px_20px] cursor-pointer text-base flex items-center gap-[10px]"
+              >
+                <i class="fa fa-github"></i>GitHub
+              </button>
+            </div>
+          </div>
+          <div
+            class="rounded-[10px] overflow-hidden w-[280px] transition-transform duration-300 p-[10px] border-2 border-[#fff] hover:-translate-y-[10px]"
+          >
+            <img
+              src="./images/projectPic.jpg"
+              alt="Project 1"
+              class="block mx-auto my-auto w-[calc(100%-20px)] h-[200px] object-contain"
+            />
+            <div class="p-[20px] text-center">
+              <h3 class="m-0 text-base text-white">Clean Sweep Pakistan</h3>
+              <p class="text-[0.7rem] text-white my-2.5">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                Accusamus, odio?
+              </p>
+              <button
+                class="bg-purple-500 text-white hover:bg-[#6f0db6] rounded-[2px] ml-[20%] border-none p-[10px_20px] cursor-pointer text-base flex items-center gap-[10px]"
+              >
+                <i class="fa fa-github"></i>GitHub
+              </button>
+            </div>
+          </div>
+          <div
+            class="rounded-[10px] overflow-hidden w-[280px] transition-transform duration-300 p-[10px] border-2 border-[#fff] hover:-translate-y-[10px]"
+          >
+            <img
+              src="./images/projectPic.jpg"
+              alt="Project 1"
+              class="block mx-auto my-auto w-[calc(100%-20px)] h-[200px] object-contain"
+            />
+            <div class="p-[20px] text-center">
+              <h3 class="m-0 text-base text-white">Clean Sweep Pakistan</h3>
+              <p class="text-[0.7rem] text-white my-2.5">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                Accusamus, odio?
+              </p>
+              <button
+                class="bg-purple-500 text-white hover:bg-[#6f0db6] rounded-[2px] ml-[20%] border-none p-[10px_20px] cursor-pointer text-base flex items-center gap-[10px]"
+              >
+                <i class="fa fa-github"></i>GitHub
+              </button>
+            </div>
+          </div>
+          <div
+            class="rounded-[10px] overflow-hidden w-[280px] transition-transform duration-300 p-[10px] border-2 border-[#fff] hover:-translate-y-[10px]"
+          >
+            <img
+              src="./images/projectPic.jpg"
+              alt="Project 1"
+              class="block mx-auto my-auto w-[calc(100%-20px)] h-[200px] object-contain"
+            />
+            <div class="p-[20px] text-center">
+              <h3 class="m-0 text-base text-white">Clean Sweep Pakistan</h3>
+              <p class="text-[0.7rem] text-white my-2.5">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                Accusamus, odio?
+              </p>
+              <button
+                class="bg-purple-500 text-white hover:bg-[#6f0db6] rounded-[2px] ml-[20%] border-none p-[10px_20px] cursor-pointer text-base flex items-center gap-[10px]"
+              >
+                <i class="fa fa-github"></i>GitHub
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-black py-5 px-10 text-center md:text-left">
+      <div
+        class="container mx-auto flex flex-col md:flex-row items-center justify-between"
+      >
+        <div class="flex-1 mb-2">
+          <h3 class="text-white">Designed and Developed By Faraz</h3>
+        </div>
+        <div class="flex-1 text-center md:text-center mb-4 md:mb-0">
+          <h3 class="text-white">Copyright © 2024 OSOL</h3>
+        </div>
+        <div class="flex-1 flex justify-center md:justify-end space-x-4">
+          <a href="https://github.com/amirfaraz07" class="text-white"
+            ><i class="fa fa-github"></i
+          ></a>
+          <a href="https://x.com/amirfaraz07" class="text-white"
+            ><i class="fa fa-twitter"></i
+          ></a>
+          <a href="https://www.linkedin.com/in/amirfaraz07/" class="text-white"
+            ><i class="fa fa-linkedin"></i
+          ></a>
+          <a href="https://www.instagram.com/itz__faraz/" class="text-white"
+            ><i class="fa fa-instagram"></i
+          ></a>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
