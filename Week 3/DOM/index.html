@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DOM Practice</title>
+  </head>
+  <body style="background-color: #212121; color: white">
+    <div class="parent">
+      <div class="day">Monday</div>
+      <div class="day">Teusday</div>
+      <div class="day">Wednesday</div>
+      <div class="day">Thursday</div>
+    </div>
+
+    <ul class="language">
+      <li>Javascript</li>
+    </ul>
+  </body>
+  <script>
+    const parent = document.querySelector(".parent");
+    // console.log(parent);
+    // console.log(parent.children); // to get it's all chidlrens only returns HTMLCollection
+    // console.log(parent.children[2].innerHTML);
+
+    // for (let i = 0; i < parent.children.length; i++) {
+    //   console.log(`For loop - ${parent.children[i].innerHTML}`);
+    // }
+
+    parent.children[2].style.color = "orange";
+
+    // From parent to child
+
+    // console.log(parent.firstElementChild); // to access 1st child
+    // console.log(parent.lastElementChild); // to access last child
+
+    // From child to parent
+
+    const dayOne = document.querySelector(".day");
+    // console.log(dayOne);
+    // console.log(dayOne.parentElement); // gives parent class whole data
+    // console.log(dayOne.nextElementSibling); // gives next child
+
+    // Child Nodes
+
+    // console.log("Nodes", parent.childNodes); // so child nodes gives us all a NodeList containing childs ( a tree like structure ) ( it counts number of child present in a parent in addition to line breaks as well like i wrote a child div and then pressed enter for next line it will count it as 2 ) ( important note: it counts only line break after text if after child div i enter mutiple lines keeping them empty it will count it as one only )
+
+    // How to create Node List i.e. creating an element programmatically
+    const div = document.createElement("div");
+    // console.log(div);
+    div.className = "main";
+    div.id = Math.floor(Math.random() * 10 + 1);
+    div.setAttribute("title", "Practicing DOM");
+    div.style.backgroundColor = "green";
+    div.style.padding = "12px";
+    div.style.margin = "30px";
+    div.style.textAlign = "center";
+    // div.innerHTML = "Created an element in script tag";
+
+    // now what happens here is that using className, id and innerHTML separately is not a good practice because it's override and then set the values. So, to overcome this using setAttribute is the best option to use because it directly insert it in the tag
+
+    // we can achieve innerText functionality in the same way by creating a text node and then appending it into the div
+
+    const addText = document.createTextNode(
+      "Created an element in script tag using Text Node"
+    );
+    div.appendChild(addText);
+
+    // Although we have created an element but still we can't render it on webpage to do that we will append child into the document's body like we did above
+    document.body.appendChild(div);
+
+    // -> Adding element
+    function addLanguage(langName) {
+      const list = document.createElement("li");
+      list.innerHTML = `${langName}`;
+      document.querySelector(".language").appendChild(list);
+    }
+
+    addLanguage("Python");
+    addLanguage("Node JS");
+    addLanguage("Express JS");
+
+    // now this is normal and simple method which is usually followed but it always traverse it completely to add value at end right now it is 1 but what if there are 1 lac values so to overcome it we have an optimize approach
+
+    function addLanguageOptimize(langName) {
+      const list = document.createElement("li");
+      list.appendChild(document.createTextNode(langName));
+      document.querySelector(".language").appendChild(list);
+    }
+
+    addLanguageOptimize("MySQL");
+
+    // -> Edit n-th child element
+
+    // const nthChild = document.querySelector("li:nth-child(3)");
+    // const nthChild = document.querySelector("li:first-child");
+    const nthChild = document.querySelector("li:last-child");
+
+    // 1st Method
+    // nthChild.innerHTML = "Mojo - Lang Changed"; // not an optimized way we can use other approach also
+
+    // 2nd Method
+    // const newLang = document.createElement("li");
+    // newLang.textContent = "C++ - Language changed";
+    // nthChild.replaceWith(newLang);
+
+    // 3rd Method
+    // nthChild.outerHTML = "<li>TypeScript</li>";
+
+    // -> Removing an element
+    nthChild.remove();
+  </script>
+</html>
