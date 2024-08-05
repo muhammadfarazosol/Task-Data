@@ -91,6 +91,40 @@
           </button>
         </div>
       </nav>
+
+      <!-- Mobile Menu -->
+      <div id="mobile-menu" class="hidden md:hidden">
+        <ul class="flex flex-col items-center space-y-5 text-xl">
+          <li>
+            <a href="./home.html" class="hover:border-b-2 border-purple-600">
+              <i class="fa fa-home pr-2" aria-hidden="true"></i>Home
+            </a>
+          </li>
+          <li>
+            <a href="./about.html" class="hover:border-b-2 border-purple-600">
+              <i class="fa fa-user pr-2" aria-hidden="true"></i>About
+            </a>
+          </li>
+          <li>
+            <a href="project.html" class="hover:border-b-2 border-purple-600">
+              <i class="fa fa-list-alt pr-2" aria-hidden="true"></i>Projects
+            </a>
+          </li>
+          <li>
+            <a href="./resume.html" class="hover:border-b-2 border-purple-600">
+              <i class="fa fa-file-text-o pr-2" aria-hidden="true"></i>Resume
+            </a>
+          </li>
+          <li>
+            <a
+              href="https://github.com/amirfaraz07"
+              class="text-white text-3xl"
+            >
+              <i class="fa fa-github-square" aria-hidden="true"></i>
+            </a>
+          </li>
+        </ul>
+      </div>
     </header>
 
     <!-- Projects Section -->
@@ -255,4 +289,17 @@
       </div>
     </footer>
   </body>
+
+  <script>
+    document
+      .getElementById("menu-toggle")
+      .addEventListener("click", function () {
+        var mobileMenu = document.getElementById("mobile-menu");
+        if (mobileMenu.classList.contains("hidden")) {
+          mobileMenu.classList.remove("hidden");
+        } else {
+          mobileMenu.classList.add("hidden");
+        }
+      });
+  </script>
 </html>
