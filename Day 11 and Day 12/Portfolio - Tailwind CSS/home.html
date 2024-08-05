@@ -98,13 +98,14 @@
         <!-- Hamburger Menu for Mobile -->
         <div class="md:hidden flex items-center">
           <button id="menu-toggle" class="text-white text-3xl mr-10">
-            <i class="fa fa-bars" aria-hidden="true"></i>
+            <i id="menu-icon" class="fa fa-bars" aria-hidden="true"></i>
+            <i id="menu-icon" class="fa fa-times hidden" aria-hidden="true"></i>
           </button>
         </div>
       </nav>
 
       <!-- Mobile Menu -->
-      <div id="mobile-menu" class="hidden md:hidden">
+      <div id="mobile-menu" class="hidden py-5 backdrop-blur-3xl md:hidden">
         <ul class="flex flex-col items-center space-y-5 text-xl">
           <li>
             <a href="home.html" class="hover:border-b-2 border-purple-600">
@@ -251,15 +252,22 @@
       </div>
     </footer>
   </body>
+
   <script>
     document
       .getElementById("menu-toggle")
       .addEventListener("click", function () {
         var mobileMenu = document.getElementById("mobile-menu");
+        const menuIcon = document.getElementById("menu-icon");
+
         if (mobileMenu.classList.contains("hidden")) {
           mobileMenu.classList.remove("hidden");
+          menuIcon.classList.remove("fa-bars");
+          menuIcon.classList.add("fa-times");
         } else {
           mobileMenu.classList.add("hidden");
+          menuIcon.classList.remove("fa-times");
+          menuIcon.classList.add("fa-bars");
         }
       });
   </script>
