@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Async Behavior of Code</title>
+  </head>
+  <body>
+    <h1>Async Code Execution</h1>
+    <button id="start">Start</button>
+    <button id="stop">Stop</button>
+  </body>
+  <script>
+    const hello = () => {
+      console.log("Faraz Amir");
+    };
+    const changeH1 = () => {
+      document.querySelector("h1").innerHTML =
+        "Async Code Execution After 2 seconds";
+    };
+    // const donotChange = setTimeout(changeH1, 2000);
+
+    // Now what if i want to stop the execution of the setTimeout we have clearInterval for it but we have to provide reference to it
+    // So we will hold our setTimeout it in a variable
+
+    // document.querySelector("#stop").addEventListener("click", () => {
+    //   clearInterval(donotChange);
+    //   console.log("setTimeout Stopped");
+    // });
+
+    // setInterval -> keep on executing after specific time delay ( can also have 3rd parameter in which we can pass string or whatever we want )
+
+    // setInterval(() => {
+    //   console.log("faraz");
+    // }, 1000);
+
+    // passing 3rd parameter
+    // setInterval(
+    //   (str) => {
+    //     console.log(str);
+    //   },
+    //   1000,
+    //   "faraz"
+    // );
+
+    // const name = (str) => {
+    //   console.log(str);
+    // };
+    // setInterval(name, 2000, "faraz");
+
+    let intervalId;
+    document.querySelector("#start").addEventListener("click", () => {
+      intervalId = setInterval(() => {
+        console.log("faraz");
+      }, 1000);
+      console.log("Interval Staretd");
+    });
+    document.querySelector("#stop").addEventListener("click", () => {
+      clearInterval(intervalId);
+      console.log("Interval Stopped");
+    });
+  </script>
+</html>
