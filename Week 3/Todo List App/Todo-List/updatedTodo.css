@@ -1,0 +1,69 @@
+body {
+  font-family: "Inter", sans-serif;
+  background: linear-gradient(to right, rgb(144, 17, 105), rgb(51, 0, 131));
+  color: #333;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.todo-bar {
+  background-color: transparent;
+}
+
+.state-1 {
+  background-color: #74e874;
+}
+
+.state-2 {
+  background-color: #eee12d;
+}
+
+.state-3 {
+  background-color: #ff6866;
+}
+
+.state-4 {
+  background-color: #c4cabe;
+  text-decoration: line-through;
+}
+
+.delete-btn {
+  border: none;
+  cursor: pointer;
+  color: #eee;
+  font-size: 17px;
+}
+
+/* dropdown menu styling */
+/* .dropdown-menu {
+  display: none;
+  position: absolute;
+  z-index: 10;
+  min-width: 150px;
+} */
+
+/* .dropdown-btn:hover .dropdown-menu,
+.dropdown-menu:hover {
+  display: block;
+} */
+
+/* .dropdown-menu li {
+  list-style: none;
+} */
+
+@media (min-width: 768px) {
+  .scrollbar-light-purple {
+    max-height: 350px;
+    overflow-y: auto;
+  }
+
+  .scrollbar-light-purple::-webkit-scrollbar {
+    width: 7px;
+  }
+
+  .scrollbar-light-purple::-webkit-scrollbar-thumb {
+    background-color: #c89ac9;
+    border-radius: 20px;
+  }
+}

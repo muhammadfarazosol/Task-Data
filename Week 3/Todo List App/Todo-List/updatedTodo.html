@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Faraz's Task List</title>
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
+      rel="stylesheet"
+    />
+    <link rel="icon" type="image/x-icon" href="./favicon.png" />
+    <script src="https://unpkg.com/typed.js@2.1.0/dist/typed.umd.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="updatedTodo.css" />
+  </head>
+  <body>
+    <div class="container mx-auto p-8 max-w-lg">
+      <h1 class="text-3xl font-bold mb-4 text-center text-white">
+        Faraz's <strong class="text-[#d9a521]">Todo</strong> List
+      </h1>
+      <div class="mb-2">
+        <div class="flex mb-[20px]">
+          <input
+            id="todo-input"
+            class="flex-1 py-[10px] px-5 bg-transparent border-2 border-[#e6b7eca1] text-[16px] text-[#eee] rounded-[30px] mr-[15px] placeholder-[#bfbfbf] outline-none"
+            placeholder="Add a new task..."
+          />
+          <button
+            id="add-todo"
+            class="w-[40px] h-[40px] rounded-[40px] bg-[#e6b7eca1] cursor-pointer text-white text-[25px] border-none outline-none"
+          >
+            <i class="fa fa-plus-circle"></i>
+          </button>
+        </div>
+
+        <div class="flex flex-col items-center p-2">
+          <h1
+            class="text-sm font-bold"
+            style="font-family: 'Noto Sans JP', sans-serif; color: #fff"
+          >
+            Tap on task to mark
+            <span class="text-[#d9a521]" id="text-display"> </span> !!
+          </h1>
+        </div>
+      </div>
+
+      <ul
+        id="todo-list"
+        class="bg-transparent border-[1.5px] border-[#e6b7eca1] rounded-lg backdrop-blur-lg p-4 scrollbar-light-purple overflow-y-auto h-[500px]"
+      >
+        <div
+          id="no-data"
+          class="flex flex-col mt-[150px] md:mt-[75px] text-center"
+        >
+          <img src="image.png" alt="No Data Found" class="mx-auto" />
+          <p class="text-white mt-4">No task found</p>
+        </div>
+      </ul>
+    </div>
+
+    <script src="updatedTodo.js"></script>
+  </body>
+</html>
