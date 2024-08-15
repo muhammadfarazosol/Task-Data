@@ -3,130 +3,146 @@ document.addEventListener("DOMContentLoaded", () => {
   const addTodoButton = document.getElementById("add-todo");
   const todoList = document.getElementById("todo-list");
   const noDataDiv = document.getElementById("no-data");
+  const deleteDialog = document.getElementById("delete-dialog");
+  const confirmDeleteButton = document.getElementById("confirm-delete");
+  const cancelDeleteButton = document.getElementById("cancel-delete");
+  const messageElement = document.getElementById("display-message");
 
   let todos = JSON.parse(localStorage.getItem("todos")) || [];
+  let taskToDeleteId = null;
 
   const saveTodos = () => {
     localStorage.setItem("todos", JSON.stringify(todos));
   };
 
+  const generateUniqueId = () => {
+    return `task-${Date.now()}`;
+  };
+
   const renderTodos = () => {
+    todoList.innerHTML = "";
+
     if (todos.length === 0) {
-      noDataDiv.classList.remove("hidden");
+      const noDataItem = document.createElement("div");
+      noDataItem.className =
+        "flex flex-col justify-center items-center mt-[60px]";
+      const noDataContent = noDataDiv.innerHTML;
+      noDataItem.innerHTML = noDataContent;
+
+      todoList.appendChild(noDataItem);
     } else {
-      noDataDiv.classList.add("hidden");
-      todoList.innerHTML = "";
-      todos.forEach((todo, index) => {
+      todos.forEach((todo) => {
         const todoItem = document.createElement("li");
+        todoItem.id = todo.id;
         todoItem.className =
-          "relative flex justify-between items-center border-2 border-[#e6b7eca1] py-4 px-5 font-bold rounded-md mb-2 todo-bar " +
+          "flex items-center justify-between bg-[#463c7b] rounded-lg py-2 px-3 border-2 border-[#e6b7eca1] transition-all duration-200 hover:bg-[#e6b7eca1] mb-2 " +
           todo.state;
+
+        const label = document.createElement("label");
+        label.className = "flex items-center text-gray-200 cursor-pointer";
 
         const checkbox = document.createElement("input");
         checkbox.type = "checkbox";
-        checkbox.className = `h-5 w-5 rounded-full appearance-none cursor-pointer ${
-          todo.state === "state-1"
-            ? "bg-[#076b1a] border-[#006400]"
-            : todo.state === "state-2"
-            ? "bg-[#dca928] border-[#dca928]"
-            : todo.state === "state-3"
-            ? "bg-[#f90300] border-[#f90300]"
-            : todo.state === "state-4"
-            ? "bg-[#7c8970] border-[#7c8970] "
-            : todo.state === ""
-            ? "bg-transparent border-2 border-white"
-            : ""
+        checkbox.id = `${todo.id}-checkbox`;
+        checkbox.className = `w-4 h-4 rounded-full border-2 appearance-none cursor-pointer ${
+          todo.state
+            ? `bg-[${todo.state}] border-[${todo.state}]`
+            : "bg-transparent border-[#e6b7eca1]"
         }`;
-
-        checkbox.checked = todo.state !== "";
+        checkbox.checked = !!todo.state;
 
         const todoText = document.createElement("span");
         todoText.textContent = todo.text;
-        todoText.className = "flex-grow ml-3 text-[#f0eeee]";
+        todoText.className = "pl-2 font-bold text-[17px]";
 
-        // Create a container for the dropdown button and menu
-        const dropdownContainer = document.createElement("div");
-        dropdownContainer.className = "relative"; // Set this as relative so the dropdown is positioned relative to it
+        if (todo.state === "#c8c7d6") {
+          todoText.classList = "pl-2 line-through";
+        }
+
+        label.appendChild(checkbox);
+        label.appendChild(todoText);
+
+        const buttonContainer = document.createElement("div");
+        buttonContainer.className = "space-x-[20px] relative";
 
         const dropdownButton = document.createElement("button");
+        dropdownButton.className =
+          "dropdown-btn bg-transparent border-none cursor-pointer text-gray-200 text-sm";
         dropdownButton.innerHTML = '<i class="fa fa-chevron-down"></i>';
-        dropdownButton.className = "dropdown-btn mx-3 text-[#eee] rounded";
         dropdownButton.addEventListener("click", (e) =>
-          toggleDropdown(e, index)
+          toggleDropdown(e, todo.id)
         );
 
         const dropdownMenu = document.createElement("ul");
         dropdownMenu.className =
-          "dropdown-menu z-10 hidden absolute bg-white rounded-lg text-[#000]";
-        dropdownMenu.style.top = "100%"; // Position it just below the button
-        dropdownMenu.style.left = "50%"; // Align it to the center of the button
-        dropdownMenu.style.transform = "translateX(-50%)"; // Offset the left alignment
+          "dropdown-menu hidden absolute right-0 w-32 z-50 bg-[#463c7b] border-2 border-[#e6b7eca1] rounded-lg shadow-lg";
+        dropdownMenu.style.top = "100%";
 
         const states = [
-          { label: "Completed", value: "state-1", color: "#076b1a" }, // Green
-          { label: "Progress", value: "state-2", color: "#dca928" }, // Yellow
-          { label: "Incomplete", value: "state-3", color: "#f90300" }, // Red
-          { label: "Cancelled", value: "state-4", color: "#7c8970" }, // Grey
-          { label: "Reset", value: "", color: "transparent", color: "black" }, // Transparent
+          { label: "Completed", value: "#6cff4a" },
+          { label: "Progress", value: "#feffa3" },
+          { label: "Incomplete", value: "#ff8b94" },
+          { label: "Cancelled", value: "#c8c7d6" },
+          { label: "Reset", value: "" },
         ];
 
         states.forEach((state) => {
           const stateItem = document.createElement("li");
           stateItem.textContent = state.label;
           stateItem.className =
-            "cursor-pointer px-4 py-2 hover:bg-[#ddd] rounded";
-          stateItem.style.color = state.color; // Set background color
-          // stateItem.style.color =
-          // state.color === "transparent" ? "#000" : "#fff"; // Set text color to ensure visibility
+            "px-4 py-2 text-gray-200 cursor-pointer hover:bg-[#e6b7eca1]";
           stateItem.addEventListener("click", () => {
-            setState(index, state.value);
+            setState(todo.id, state.value);
             closeAllDropdowns();
           });
           dropdownMenu.appendChild(stateItem);
         });
 
-        // Append the dropdown button and menu to the container
-        dropdownContainer.appendChild(dropdownButton);
-        dropdownContainer.appendChild(dropdownMenu);
+        buttonContainer.appendChild(dropdownButton);
+        buttonContainer.appendChild(dropdownMenu);
 
         const editButton = document.createElement("button");
+        editButton.className =
+          "edit-btn bg-transparent border-none cursor-pointer text-gray-200 text-sm";
         editButton.innerHTML = '<i class="fa fa-pencil"></i>';
-        editButton.className = "delete-btn mx-3 text-[#eee] rounded";
-        editButton.addEventListener("click", () => editTodo(index));
+        editButton.addEventListener("click", () => editTodo(todo.id));
 
         const deleteButton = document.createElement("button");
+        deleteButton.className =
+          "delete-btn bg-transparent border-none cursor-pointer text-gray-200 text-sm";
         deleteButton.innerHTML = '<i class="fa fa-times"></i>';
-        deleteButton.className = "delete-btn mx-3 text-[#eee] rounded";
-        deleteButton.addEventListener("click", () => deleteTodo(index));
+        deleteButton.addEventListener("click", () => {
+          taskToDeleteId = todo.id;
+          deleteDialog.classList.remove("hidden");
+        });
 
-        todoItem.appendChild(checkbox);
-        todoItem.appendChild(todoText);
-        todoItem.appendChild(dropdownContainer); // Add the dropdown container here
-        todoItem.appendChild(editButton);
-        todoItem.appendChild(deleteButton);
+        buttonContainer.appendChild(editButton);
+        buttonContainer.appendChild(deleteButton);
+
+        todoItem.appendChild(label);
+        todoItem.appendChild(buttonContainer);
 
         todoList.appendChild(todoItem);
       });
     }
   };
 
-  const addTodo = () => {
-    const todoText = todoInput.value.trim();
-    if (todoText) {
-      todos.unshift({ text: todoText, state: "" });
-      todoInput.value = "";
+  confirmDeleteButton.addEventListener("click", () => {
+    if (taskToDeleteId !== null) {
+      todos = todos.filter((todo) => todo.id !== taskToDeleteId);
       saveTodos();
       renderTodos();
+      displayMessage("Task deleted successfully!");
     }
-  };
+    deleteDialog.classList.add("hidden");
+  });
 
-  const setState = (index, state) => {
-    todos[index].state = state;
-    saveTodos();
-    renderTodos();
-  };
+  cancelDeleteButton.addEventListener("click", () => {
+    deleteDialog.classList.add("hidden");
+    taskToDeleteId = null;
+  });
 
-  const toggleDropdown = (event, index) => {
+  const toggleDropdown = (event) => {
     event.stopPropagation();
     closeAllDropdowns();
     const dropdownMenu = event.currentTarget.nextElementSibling;
@@ -134,25 +150,87 @@ document.addEventListener("DOMContentLoaded", () => {
   };
 
   const closeAllDropdowns = () => {
-    const dropdownMenus = document.querySelectorAll(".dropdown-menu");
-    dropdownMenus.forEach((menu) => menu.classList.add("hidden"));
+    document
+      .querySelectorAll(".dropdown-menu")
+      .forEach((menu) => menu.classList.add("hidden"));
   };
 
-  document.addEventListener("click", closeAllDropdowns);
+  const addTodo = () => {
+    const todoText = todoInput.value.trim();
+    if (!todoText) {
+      displayMessage("Please write something to add!!");
+      return;
+    }
+    if (todoText.length > 24) {
+      displayMessage("You can't enter more than 24 characters!!");
+      return;
+    }
+    const newTodo = {
+      id: generateUniqueId(),
+      text: todoText,
+      state: "",
+    };
+    todos.unshift(newTodo);
+    todoInput.value = "";
+    saveTodos();
+    renderTodos();
+  };
 
-  const editTodo = (index) => {
-    const newTodo = prompt("Edit your todo", todos[index].text);
-    if (newTodo !== null && newTodo.trim()) {
-      todos[index].text = newTodo.trim();
+  const displayMessage = (message) => {
+    messageElement.textContent = message;
+    messageElement.classList.remove("hidden");
+
+    setTimeout(() => {
+      messageElement.textContent = "";
+      messageElement.classList.add("hidden");
+    }, 2000);
+  };
+
+  const setState = (taskId, state) => {
+    const task = todos.find((todo) => todo.id === taskId);
+    if (task) {
+      task.state = state;
       saveTodos();
       renderTodos();
     }
   };
 
-  const deleteTodo = (index) => {
-    todos.splice(index, 1);
-    saveTodos();
-    renderTodos();
+  const editTodo = (taskId) => {
+    const taskIndex = todos.findIndex((todo) => todo.id === taskId);
+    const todoItem = document.getElementById(taskId);
+    const todoTextElement = todoItem.querySelector("span");
+
+    const originalText = todos[taskIndex].text;
+
+    const inputField = document.createElement("input");
+    inputField.type = "text";
+    inputField.value = originalText;
+    inputField.className =
+      "text-white bg-transparent outline-none border-b-2 pl-3 py-1";
+    inputField.maxLength = 24;
+    inputField.id = `${taskId}-edit`;
+
+    todoTextElement.replaceWith(inputField);
+    inputField.focus();
+    inputField.select();
+
+    const saveChanges = () => {
+      const updatedText = inputField.value.trim();
+      if (updatedText) {
+        todos[taskIndex].text = updatedText;
+      } else {
+        todos[taskIndex].text = originalText;
+      }
+      saveTodos();
+      renderTodos();
+    };
+
+    inputField.addEventListener("blur", saveChanges);
+    inputField.addEventListener("keydown", (event) => {
+      if (event.key === "Enter") {
+        saveChanges();
+      }
+    });
   };
 
   todoInput.addEventListener("keydown", (event) => {
@@ -163,17 +241,27 @@ document.addEventListener("DOMContentLoaded", () => {
 
   addTodoButton.addEventListener("click", addTodo);
 
-  renderTodos();
-});
+  new Typed("#text-display", {
+    strings: [
+      "Completed = Green",
+      "Incomplete = Red",
+      "In Progress = Yellow",
+      "Cancelled = Gray",
+    ],
+    typeSpeed: 50,
+    backSpeed: 50,
+    loop: true,
+  });
 
-let typed = new Typed("#text-display", {
-  strings: [
-    "Completed = Green",
-    "Incomplete = Red",
-    "In Progress = Yellow",
-    "Cancelled = Gray through line",
-  ],
-  typeSpeed: 50,
-  backSpeed: 50,
-  loop: true,
+  const sortable = new Sortable(todoList, {
+    animation: 150,
+    onEnd: function (e) {
+      const movedTodo = todos.splice(e.oldIndex, 1)[0];
+      todos.splice(e.newIndex, 0, movedTodo);
+      saveTodos();
+      renderTodos();
+    },
+  });
+
+  renderTodos();
 });
