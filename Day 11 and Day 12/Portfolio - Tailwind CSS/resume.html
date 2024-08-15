@@ -34,11 +34,20 @@
         /* color: black; */
         color: goldenrod;
       }
+      .header {
+        background-color: transparent;
+        transition: background-color 0.3s ease;
+      }
+
+      .navbar-scrolled {
+        /* background-color: #460a5c; */
+        background-color: black;
+      }
     </style>
   </head>
   <body>
     <!-- Header Navbar -->
-    <header class="fixed w-full py-6 bg-opacity-50 backdrop-blur-sm">
+    <header class="fixed w-full py-6">
       <nav class="mx-auto flex items-center justify-between">
         <div>
           <a href="./home.html"
@@ -198,5 +207,14 @@
           menuIcon.classList.add("fa-bars");
         }
       });
+
+    window.addEventListener("scroll", function () {
+      const header = document.querySelector("header");
+      if (window.scrollY > 1) {
+        header.classList.add("navbar-scrolled");
+      } else {
+        header.classList.remove("navbar-scrolled");
+      }
+    });
   </script>
 </html>

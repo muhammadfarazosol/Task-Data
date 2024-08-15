@@ -28,6 +28,8 @@
           rgb(51, 0, 131) 100.2%
         );
         color: #fff;
+        /* color: #460a5c; */
+        /* color: #800080; */
       }
 
       b {
@@ -40,11 +42,21 @@
         transform: scale(1.1);
         transition: 0.3s ease-in-out;
       }
+
+      .header {
+        background-color: transparent;
+        /* transition: #460a5c 0.3s ease; */
+      }
+
+      .navbar-scrolled {
+        /* background-color: #460a5c; */
+        background-color: black;
+      }
     </style>
   </head>
   <body>
     <!-- Header Navbar -->
-    <header class="fixed w-full py-6 bg-opacity-50 backdrop-blur-sm">
+    <header class="fixed w-full py-6">
       <nav class="mx-auto flex items-center justify-between">
         <div>
           <a href="home.html"
@@ -157,7 +169,7 @@
         <img
           src="./images/imageHome.png"
           alt="MERN pic"
-          class="w-3/5 md:mr-[150px] rounded-lg"
+          class="w-3/5 md:h-[350px] mb-10 md:pb-10 md:mr-[150px] rounded-lg"
         />
       </div>
     </section>
@@ -270,5 +282,14 @@
           menuIcon.classList.add("fa-bars");
         }
       });
+
+    window.addEventListener("scroll", function () {
+      const header = document.querySelector("header");
+      if (window.scrollY > 70) {
+        header.classList.add("navbar-scrolled");
+      } else {
+        header.classList.remove("navbar-scrolled");
+      }
+    });
   </script>
 </html>
