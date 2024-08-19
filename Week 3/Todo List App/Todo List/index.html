@@ -42,7 +42,7 @@
   >
     <!-- main div for wrapping todo list -->
     <div
-      class="container mx-4  md:mx-auto w-full max-w-[400px] 2xl:max-w-full p-6 bg-transparent border-2 border-[#e6b7eca1] rounded-lg backdrop-blur-3xl"
+      class="container mx-4 md:mx-auto w-full max-w-[400px] 2xl:max-w-[800px] p-6 bg-transparent border-2 border-[#e6b7eca1] rounded-lg backdrop-blur-3xl"
     >
       <!-- Heading -->
       <h1 class="text-gray-200 text-center font-bold text-2xl md:text-3xl mb-6">
@@ -83,12 +83,12 @@
 
       <!-- div for text display  -->
       <div class="text-center text-[#d9a521] font-bold mb-2">
-        <h3>Scroll down to see your previous tasks</h3>
+        <h3 class="heading-display">Scroll down to see your previous tasks</h3>
       </div>
 
       <!-- "No Data" Image  -->
       <div id="no-data" class="hidden">
-        <img class="w-20" src="./noDataFound.png" />
+        <img class="w-20" src="./Assets/image.png" />
         <p class="text-white">Add Task to Get Started</p>
       </div>
 
@@ -102,7 +102,7 @@
     </div>
 
     <!-- Confirmation Delete Dialog -->
-     <div class="hidden" id="delete-dialog">
+    <div class="hidden" id="delete-dialog">
       <div
         class="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-50"
       >
