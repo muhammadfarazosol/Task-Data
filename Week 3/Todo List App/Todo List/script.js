@@ -1,4 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
+  // Grabbing DOM elements from index.html
   const todoInput = document.getElementById("todo-input");
   const addTodoButton = document.getElementById("add-todo");
   const todoList = document.getElementById("todo-list");
@@ -8,30 +9,37 @@ document.addEventListener("DOMContentLoaded", () => {
   const cancelDeleteButton = document.getElementById("cancel-delete");
   const messageElement = document.getElementById("display-message");
 
+  // Variables for state management
   let todos = JSON.parse(localStorage.getItem("todos")) || [];
+  // console.log(todos);
+
   let taskToDeleteId = null;
   let sortableEnabled = false;
 
+  // Function to save tasks to local storage
   const saveTodos = () => {
     localStorage.setItem("todos", JSON.stringify(todos));
   };
+  // console.log("after save todos", todos);
 
+  // Function to generate unique IDs for tasks
   const generateUniqueId = () => {
     return `task-${Date.now()}`;
   };
 
+  // Function to render the TODO list
   const renderTodos = () => {
     todoList.innerHTML = "";
 
     if (todos.length === 0) {
+      // Display "no data" message if no tasks are present
       const noDataItem = document.createElement("div");
       noDataItem.className =
         "flex flex-col justify-center items-center mt-[60px]";
-      const noDataContent = noDataDiv.innerHTML;
-      noDataItem.innerHTML = noDataContent;
-
+      noDataItem.innerHTML = noDataDiv.innerHTML;
       todoList.appendChild(noDataItem);
     } else {
+      // Loop through and render each task
       todos.forEach((todo) => {
         const todoItem = document.createElement("li");
         todoItem.id = todo.id;
@@ -39,6 +47,7 @@ document.addEventListener("DOMContentLoaded", () => {
           "flex items-center justify-between bg-[#463c7b] rounded-lg py-2 px-3 border-2 border-[#e6b7eca1] transition-all duration-200 hover:bg-[#e6b7eca1] mb-2 " +
           todo.state;
 
+        // Create the label, checkbox, and task text
         const label = document.createElement("label");
         label.className = "flex items-center text-gray-200 cursor-pointer";
 
@@ -54,15 +63,15 @@ document.addEventListener("DOMContentLoaded", () => {
 
         const todoText = document.createElement("span");
         todoText.textContent = todo.text;
-        todoText.className = "pl-2 font-bold text-[17px]";
-
-        if (todo.state === "#c8c7d6") {
-          todoText.classList = "pl-2 line-through";
-        }
+        todoText.className =
+          todo.state === "#c8c7d6"
+            ? "pl-2 line-through"
+            : "pl-2 font-bold text-[17px]";
 
         label.appendChild(checkbox);
         label.appendChild(todoText);
 
+        // Creating buttons (dropdown, edit, delete)
         const buttonContainer = document.createElement("div");
         buttonContainer.className = "space-x-[20px] relative";
 
@@ -123,7 +132,7 @@ document.addEventListener("DOMContentLoaded", () => {
         todoItem.appendChild(label);
         todoItem.appendChild(buttonContainer);
 
-        // Attach the double-click event to enable sortable
+        // Attach double-click event for drag-and-drop sorting
         todoItem.addEventListener("dblclick", handleDoubleClick);
 
         todoList.appendChild(todoItem);
@@ -131,41 +140,44 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   };
 
-  confirmDeleteButton.addEventListener("click", () => {
-    if (taskToDeleteId !== null) {
-      todos = todos.filter((todo) => todo.id !== taskToDeleteId);
-      saveTodos();
-      renderTodos();
-      displayMessage("Task deleted successfully!", "#1FFF0F");
-    }
-    deleteDialog.classList.add("hidden");
-  });
-
-  cancelDeleteButton.addEventListener("click", () => {
-    deleteDialog.classList.add("hidden");
-    taskToDeleteId = null;
-  });
-
+  let openDropdown = null;
+  // Function to handle toggling the dropdown and closing others
   const toggleDropdown = (event) => {
     event.stopPropagation();
-    closeAllDropdowns();
+
     const dropdownMenu = event.currentTarget.nextElementSibling;
-    dropdownMenu.classList.toggle("hidden");
-  };
 
-  const closeAllDropdowns = () => {
-    document
-      .querySelectorAll(".dropdown-menu")
-      .forEach((menu) => menu.classList.add("hidden"));
-  };
-
-  // Close dropdowns when clicking outside of them
-  document.addEventListener("click", (event) => {
-    if (!event.target.closest(".dropdown-btn")) {
-      closeAllDropdowns();
+    // Check if the clicked dropdown is already open
+    if (openDropdown === dropdownMenu) {
+      // If it's the same dropdown, just toggle its visibility
+      dropdownMenu.classList.toggle("hidden");
+    } else {
+      dropdownMenu.classList.remove("hidden");
+      openDropdown = dropdownMenu;
     }
+  };
+
+  // Function to close the dropdown when clicking outside
+  const closeDropdowns = (event) => {
+    if (
+      openDropdown &&
+      !openDropdown.contains(event.target) &&
+      !event.target.classList.contains("dropdown-btn")
+    ) {
+      openDropdown.classList.add("hidden");
+      openDropdown = null; // Reset the currently open dropdown
+    }
+  };
+
+  // event listener to document for outside clicks
+  document.addEventListener("click", closeDropdowns);
+
+  // event listener to dropdown buttons
+  document.querySelectorAll(".dropdown-btn").forEach((button) => {
+    button.addEventListener("click", toggleDropdown);
   });
 
+  // Function to add a new task
   const addTodo = () => {
     const todoText = todoInput.value.trim();
     if (!todoText) {
@@ -185,8 +197,10 @@ document.addEventListener("DOMContentLoaded", () => {
     todoInput.value = "";
     saveTodos();
     renderTodos();
+    displayMessage("Task added successfully", "#1FFF0F");
   };
 
+  // Function to display messages (e.g., errors, success)
   const displayMessage = (message, color) => {
     messageElement.textContent = message;
     messageElement.style.color = color;
@@ -198,6 +212,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }, 3000);
   };
 
+  // Function to set the state of a task (e.g., Completed, Progress)
   const setState = (taskId, state) => {
     const task = todos.find((todo) => todo.id === taskId);
     if (task) {
@@ -207,6 +222,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   };
 
+  // Function to edit a task
   const editTodo = (taskId) => {
     const taskIndex = todos.findIndex((todo) => todo.id === taskId);
     const todoItem = document.getElementById(taskId);
@@ -238,6 +254,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // Adjust width when the input changes
     inputField.addEventListener("input", adjustWidth);
 
+    // Check before saving updated text
     const saveChanges = () => {
       const updatedText = inputField.value.trim();
       if (updatedText === "") {
@@ -248,8 +265,6 @@ document.addEventListener("DOMContentLoaded", () => {
           `Task updated from "${originalText}" to "${updatedText}"`,
           "#1FFF0F"
         );
-      } else {
-        todos[taskIndex].text = originalText;
       }
       saveTodos();
       renderTodos();
@@ -257,24 +272,47 @@ document.addEventListener("DOMContentLoaded", () => {
 
     inputField.addEventListener("blur", saveChanges);
 
-    inputField.addEventListener("keydown", (e) => {
-      if (e.key === "Enter") {
+    inputField.addEventListener("keydown", (event) => {
+      if (event.key === "Enter") {
+        event.preventDefault();
         saveChanges();
-      } else if (e.key === "Escape") {
-        todos[taskIndex].text = originalText;
-        renderTodos();
       }
     });
   };
 
-  // Function to handle enabling dragging on double-click
-  const handleDoubleClick = () => {
+  // Function to delete a task
+  const deleteTodo = (taskId) => {
+    todos = todos.filter((todo) => todo.id !== taskId);
+    saveTodos();
+    renderTodos();
+    deleteDialog.classList.add("hidden");
+    displayMessage("Task deleted successfully", "#1FFF0F");
+  };
+
+  // Function to handle the double-click for enabling drag-and-drop
+  const handleDoubleClick = (event) => {
+    const taskElement = event.currentTarget;
+    taskElement.classList.add("sortable-active");
+
     if (!sortableEnabled) {
-      sortable.option("disabled", false); // Enable dragging
+      enableDragAndDrop();
       sortableEnabled = true;
     }
   };
 
+  // Function to initialize drag-and-drop
+  const enableDragAndDrop = () => {
+    const sortable = new Sortable(todoList, {
+      animation: 150,
+      onUpdate: (event) => {
+        const newOrder = Array.from(todoList.children).map((child) => child.id);
+        todos = newOrder.map((id) => todos.find((todo) => todo.id === id));
+        saveTodos();
+      },
+    });
+  };
+
+  // Function for typed.js library
   new Typed("#text-display", {
     strings: [
       "Completed = Green",
@@ -287,27 +325,21 @@ document.addEventListener("DOMContentLoaded", () => {
     loop: true,
   });
 
-  // Initialize Sortable with dragging disabled
-  const sortable = new Sortable(todoList, {
-    animation: 300,
-    disabled: true, // Disable dragging initially
-    onEnd: function (e) {
-      const movedTodo = todos.splice(e.oldIndex, 1)[0];
-      todos.splice(e.newIndex, 0, movedTodo);
-      saveTodos();
-      renderTodos();
-      sortable.option("disabled", true); // Disable dragging again
-      sortableEnabled = false;
-    },
-  });
-
+  // Event Listeners for add todo
   addTodoButton.addEventListener("click", addTodo);
-
-  todoInput.addEventListener("keydown", (e) => {
-    if (e.key === "Enter") {
+  todoInput.addEventListener("keydown", (event) => {
+    if (event.key === "Enter") {
       addTodo();
     }
   });
 
+  confirmDeleteButton.addEventListener("click", () =>
+    deleteTodo(taskToDeleteId)
+  );
+  cancelDeleteButton.addEventListener("click", () => {
+    deleteDialog.classList.add("hidden");
+  });
+
+  // Initial render on page load
   renderTodos();
 });
