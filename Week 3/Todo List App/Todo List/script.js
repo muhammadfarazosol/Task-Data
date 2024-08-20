@@ -141,20 +141,25 @@ document.addEventListener("DOMContentLoaded", () => {
   };
 
   let openDropdown = null;
+
   // Function to handle toggling the dropdown and closing others
   const toggleDropdown = (event) => {
     event.stopPropagation();
 
     const dropdownMenu = event.currentTarget.nextElementSibling;
 
-    // Check if the clicked dropdown is already open
-    if (openDropdown === dropdownMenu) {
-      // If it's the same dropdown, just toggle its visibility
-      dropdownMenu.classList.toggle("hidden");
-    } else {
-      dropdownMenu.classList.remove("hidden");
-      openDropdown = dropdownMenu;
+    // If a dropdown is already open and it's not the current one, close it
+    if (openDropdown && openDropdown !== dropdownMenu) {
+      openDropdown.classList.add("hidden");
     }
+
+    // Toggle the visibility of the clicked dropdown
+    dropdownMenu.classList.toggle("hidden");
+
+    // Update the openDropdown variable
+    openDropdown = dropdownMenu.classList.contains("hidden")
+      ? null
+      : dropdownMenu;
   };
 
   // Function to close the dropdown when clicking outside
@@ -169,10 +174,10 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   };
 
-  // event listener to document for outside clicks
+  // Event listener to document for outside clicks
   document.addEventListener("click", closeDropdowns);
 
-  // event listener to dropdown buttons
+  // Event listener to dropdown buttons
   document.querySelectorAll(".dropdown-btn").forEach((button) => {
     button.addEventListener("click", toggleDropdown);
   });
