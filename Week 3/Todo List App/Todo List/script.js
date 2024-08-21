@@ -79,6 +79,7 @@ document.addEventListener("DOMContentLoaded", () => {
         dropdownButton.className =
           "dropdown-btn bg-transparent border-none cursor-pointer text-gray-200 text-sm";
         dropdownButton.innerHTML = '<i class="fa fa-chevron-down"></i>';
+        // event listener for tasks to open toggle dropdown only for that task on which it is triggered
         dropdownButton.addEventListener("click", (e) =>
           toggleDropdown(e, todo.id)
         );
@@ -103,7 +104,7 @@ document.addEventListener("DOMContentLoaded", () => {
             "px-4 py-2 text-gray-200 cursor-pointer hover:bg-[#e6b7eca1]";
           stateItem.addEventListener("click", () => {
             setState(todo.id, state.value);
-            closeAllDropdowns();
+            closeDropdowns();
           });
           dropdownMenu.appendChild(stateItem);
         });
@@ -137,6 +138,16 @@ document.addEventListener("DOMContentLoaded", () => {
 
         todoList.appendChild(todoItem);
       });
+    }
+  };
+
+  // Function to set the state of a task for checkbox (e.g., Completed, Progress)
+  const setState = (taskId, state) => {
+    const task = todos.find((todo) => todo.id === taskId);
+    if (task) {
+      task.state = state;
+      saveTodos();
+      renderTodos();
     }
   };
 
@@ -215,16 +226,6 @@ document.addEventListener("DOMContentLoaded", () => {
       messageElement.textContent = "";
       messageElement.classList.add("hidden");
     }, 3000);
-  };
-
-  // Function to set the state of a task (e.g., Completed, Progress)
-  const setState = (taskId, state) => {
-    const task = todos.find((todo) => todo.id === taskId);
-    if (task) {
-      task.state = state;
-      saveTodos();
-      renderTodos();
-    }
   };
 
   // Function to edit a task
