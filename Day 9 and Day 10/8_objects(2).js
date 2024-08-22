@@ -77,6 +77,13 @@ const course = {
   instructor: "faraz",
 };
 
+Object.freeze(course); // it will not allow nay manipulation in object neither you add or update value
+Object.seal(course); // it allow you to manipulate existing key's values
+
+course.courseName = "C++";
+course.hello = "hello";
+console.log(course);
+
 console.log(course.courseName);
 // one more method is to access them which is more effecient
 const { courseName } = course;

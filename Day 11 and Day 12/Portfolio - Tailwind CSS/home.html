@@ -21,7 +21,6 @@
 
       body {
         font-family: "Inter", sans-serif;
-        /* background: linear-gradient(120deg, #2980b9, #8e44ad); */
         background: radial-gradient(
           circle at 52.1% -29.6%,
           rgb(144, 17, 105) 0%,
@@ -35,16 +34,40 @@
       }
 
       .social-icon:hover {
-        /* box-shadow: 0 0 30px rgba(213, 21, 216, 0.7); */
         box-shadow: 0 0 30px rgb(144, 17, 105);
         transform: scale(1.1);
         transition: 0.3s ease-in-out;
+      }
+
+      .header {
+        background-color: transparent;
+      }
+
+      .navbar-scrolled {
+        background-color: black;
+      }
+
+      .shake {
+        display: inline-block;
+        animation: shake 0.5s ease-in-out infinite;
+      }
+
+      @keyframes shake {
+        25% {
+          transform: translateX(-10px);
+        }
+        50% {
+          transform: translateX(5px);
+        }
+        75% {
+          transform: translateX(-10px);
+        }
       }
     </style>
   </head>
   <body>
     <!-- Header Navbar -->
-    <header class="fixed w-full py-6 bg-opacity-50 backdrop-blur-sm">
+    <header class="fixed w-full py-6 z-10">
       <nav class="mx-auto flex items-center justify-between">
         <div>
           <a href="home.html"
@@ -88,8 +111,10 @@
 
         <div class="hidden md:block">
           <a
-            href="https://github.com/muhammadfarazosol"
+            href="https://github.com/amirfaraz07"
             class="text-white text-3xl mr-10"
+            target="_blank"
+            rel="noopener noreferrer"
           >
             <i class="fa fa-github-square" aria-hidden="true"></i>
           </a>
@@ -131,6 +156,8 @@
             <a
               href="https://github.com/amirfaraz07"
               class="text-white text-3xl"
+              target="_blank"
+              rel="noopener noreferrer"
             >
               <i class="fa fa-github-square" aria-hidden="true"></i>
             </a>
@@ -141,23 +168,25 @@
 
     <!-- Hello Section -->
     <section
-      class="h-screen flex flex-col md:flex-row items-center pt-10 justify-center"
+      class="h-screen flex flex-col md:flex-row items-center pt-20 max-sm:pt-[130px] justify-center"
       id="home"
     >
       <div
-        class="w-full md:w-1/2 flex flex-col items-center md:items-start md:pl-[150px]"
+        class="w-full md:w-1/2 flex flex-col items-center md:items-start text-center md:text-left md:pl-[90px] lg:pl-[150px]"
       >
-        <h1 class="text-4xl mb-2">Hi There! 👋</h1>
+        <h1 class="text-4xl mb-2">
+          Hi There! <span id="wave-emoji" class="shake">👋</span>
+        </h1>
         <h2 class="text-5xl mb-2">I'm <b>Faraz Amir</b></h2>
         <p class="text-3xl">Software Engineer</p>
       </div>
       <div
-        class="w-full h-[45%] md:w-1/2 flex justify-center mt-[100px] md:justify-end md:mb-20"
+        class="w-full md:w-1/2 flex justify-center mt-[80px] md:mt-[100px] md:justify-end lg:mb-20"
       >
         <img
           src="./images/imageHome.png"
           alt="MERN pic"
-          class="w-3/5 md:mr-[150px] rounded-lg"
+          class="w-3/4 md:w-auto md:h-[300px] md:mr-10 lg:h-[350px] mb-10 md:pb-10 lg:mr-[150px] rounded-lg"
         />
       </div>
     </section>
@@ -204,24 +233,32 @@
         <a
           href="https://github.com/amirfaraz07"
           class="social-icon bg-white flex justify-center items-center w-[50px] h-[50px] text-3xl rounded-full no-underline"
+          target="_blank"
+          rel="noopener noreferrer"
         >
           <i class="fa fa-github text-[#901169]"></i>
         </a>
         <a
           href="https://x.com/amirfaraz07"
           class="social-icon bg-white flex justify-center items-center w-[50px] h-[50px] text-3xl rounded-full no-underline"
+          target="_blank"
+          rel="noopener noreferrer"
         >
           <i class="fa fa-twitter text-[#901169]"></i>
         </a>
         <a
           href="https://www.linkedin.com/in/amirfaraz07/"
           class="social-icon bg-white flex justify-center items-center w-[50px] h-[50px] text-3xl rounded-full no-underline"
+          target="_blank"
+          rel="noopener noreferrer"
         >
           <i class="fa fa-linkedin text-[#901169]"></i>
         </a>
         <a
           href="https://www.instagram.com/itz__faraz/"
           class="social-icon bg-white flex justify-center items-center w-[50px] h-[50px] text-3xl rounded-full no-underline"
+          target="_blank"
+          rel="noopener noreferrer"
         >
           <i class="fa fa-instagram text-[#901169]"></i>
         </a>
@@ -232,20 +269,34 @@
     <footer class="bg-black py-5 px-10">
       <div class="flex flex-col md:flex-row items-center">
         <div class="flex-1 mb-4 md:mb-0">
-          <h3>Designed and Developed By Faraz</h3>
+          <h3>Developed By Faraz</h3>
         </div>
         <div class="flex-1 md:text-center mb-4 md:mb-0">
           <h3>Copyright © 2024 OSOL</h3>
         </div>
         <div class="flex-1 flex md:justify-end space-x-4">
-          <a href="https://github.com/amirfaraz07"
+          <a
+            href="https://github.com/amirfaraz07"
+            target="_blank"
+            rel="noopener noreferrer"
             ><i class="fa fa-github"></i
           ></a>
-          <a href="https://x.com/amirfaraz07"><i class="fa fa-twitter"></i></a>
-          <a href="https://www.linkedin.com/in/amirfaraz07/"
+          <a
+            href="https://x.com/amirfaraz07"
+            target="_blank"
+            rel="noopener noreferrer"
+            ><i class="fa fa-twitter"></i
+          ></a>
+          <a
+            href="https://www.linkedin.com/in/amirfaraz07/"
+            target="_blank"
+            rel="noopener noreferrer"
             ><i class="fa fa-linkedin"></i
           ></a>
-          <a href="https://www.instagram.com/itz__faraz/"
+          <a
+            href="https://www.instagram.com/itz__faraz/"
+            target="_blank"
+            rel="noopener noreferrer"
             ><i class="fa fa-instagram"></i
           ></a>
         </div>
@@ -270,5 +321,14 @@
           menuIcon.classList.add("fa-bars");
         }
       });
+
+    window.addEventListener("scroll", function () {
+      const header = document.querySelector("header");
+      if (window.scrollY > 70) {
+        header.classList.add("navbar-scrolled");
+      } else {
+        header.classList.remove("navbar-scrolled");
+      }
+    });
   </script>
 </html>

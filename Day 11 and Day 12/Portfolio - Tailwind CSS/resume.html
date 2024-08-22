@@ -21,7 +21,6 @@
 
       body {
         font-family: "Inter", sans-serif;
-        /* background: linear-gradient(120deg, #2980b9, #8e44ad); */
         background: radial-gradient(
           circle at 52.1% -29.6%,
           rgb(144, 17, 105) 0%,
@@ -31,14 +30,21 @@
       }
 
       b {
-        /* color: black; */
         color: goldenrod;
+      }
+      .header {
+        background-color: transparent;
+        transition: background-color 0.3s ease;
+      }
+
+      .navbar-scrolled {
+        background-color: black;
       }
     </style>
   </head>
-  <body>
+  <body class="flex flex-col min-h-screen">
     <!-- Header Navbar -->
-    <header class="fixed w-full py-6 bg-opacity-50 backdrop-blur-sm">
+    <header class="fixed w-full py-6 z-10">
       <nav class="mx-auto flex items-center justify-between">
         <div>
           <a href="./home.html"
@@ -79,8 +85,10 @@
 
         <div class="hidden md:block">
           <a
-            href="https://github.com/muhammadfarazosol"
+            href="https://github.com/amirfaraz07"
             class="text-white text-3xl mr-10"
+            target="_blank"
+            rel="noopener noreferrer"
           >
             <i class="fa fa-github-square" aria-hidden="true"></i>
           </a>
@@ -122,6 +130,8 @@
             <a
               href="https://github.com/amirfaraz07"
               class="text-white text-3xl"
+              target="_blank"
+              rel="noopener noreferrer"
             >
               <i class="fa fa-github-square" aria-hidden="true"></i>
             </a>
@@ -131,49 +141,64 @@
     </header>
 
     <!-- Resume Preview and Download Section -->
-    <section class="resume-section py-24 text-center">
-      <div class="container mx-auto">
-        <button
-          class="resume-btn bg-purple-500 hover:bg-[#6f0db6] text-white py-3 px-8 my-5 rounded-lg cursor-pointer text-lg"
-          onclick="window.open('./images/resume.pdf', '_blank')"
-        >
-          Preview
-        </button>
-        <div>
-          <img
-            src="./images/resume.jpg"
-            alt="Resume Preview"
-            class="max-w-full md:w-[50%] h-auto md:rounded-3xl my-5 mx-auto"
-          />
-        </div>
-        <a href="./images/resume.pdf" download>
+    <main class="flex-grow">
+      <section class="resume-section py-24 text-center">
+        <div class="container mx-auto">
           <button
-            class="download-btn bg-purple-500 hover:bg-[#6f0db6] text-white py-3 px-8 my-5 rounded-lg cursor-pointer text-lg"
+            class="resume-btn bg-purple-500 hover:bg-[#6f0db6] text-white py-3 px-8 my-5 rounded-lg cursor-pointer text-lg"
+            onclick="window.open('./images/resume.pdf', '_blank')"
           >
-            Download
+            Preview
           </button>
-        </a>
-      </div>
-    </section>
-
+          <div>
+            <img
+              src="./images/resume.jpg"
+              alt="Resume Preview"
+              class="max-w-full md:w-[50%] md:rounded-xl my-5 mx-auto"
+            />
+          </div>
+          <a href="./images/resume.pdf" download>
+            <button
+              class="download-btn bg-purple-500 hover:bg-[#6f0db6] text-white py-3 px-8 my-5 rounded-lg cursor-pointer text-lg"
+            >
+              Download
+            </button>
+          </a>
+        </div>
+      </section>
+    </main>
     <!-- Footer -->
-    <footer class="bg-black py-5 px-10">
+    <footer class="bg-black py-5 px-10 mt-auto">
       <div class="flex flex-col md:flex-row items-center">
         <div class="flex-1 mb-4 md:mb-0">
-          <h3>Designed and Developed By Faraz</h3>
+          <h3>Developed By Faraz</h3>
         </div>
         <div class="flex-1 md:text-center mb-4 md:mb-0">
           <h3>Copyright © 2024 OSOL</h3>
         </div>
         <div class="flex-1 flex md:justify-end space-x-4">
-          <a href="https://github.com/amirfaraz07"
+          <a
+            href="https://github.com/amirfaraz07"
+            target="_blank"
+            rel="noopener noreferrer"
             ><i class="fa fa-github"></i
           ></a>
-          <a href="https://x.com/amirfaraz07"><i class="fa fa-twitter"></i></a>
-          <a href="https://www.linkedin.com/in/amirfaraz07/"
+          <a
+            href="https://x.com/amirfaraz07"
+            target="_blank"
+            rel="noopener noreferrer"
+            ><i class="fa fa-twitter"></i
+          ></a>
+          <a
+            href="https://www.linkedin.com/in/amirfaraz07/"
+            target="_blank"
+            rel="noopener noreferrer"
             ><i class="fa fa-linkedin"></i
           ></a>
-          <a href="https://www.instagram.com/itz__faraz/"
+          <a
+            href="https://www.instagram.com/itz__faraz/"
+            target="_blank"
+            rel="noopener noreferrer"
             ><i class="fa fa-instagram"></i
           ></a>
         </div>
@@ -198,5 +223,14 @@
           menuIcon.classList.add("fa-bars");
         }
       });
+
+    window.addEventListener("scroll", function () {
+      const header = document.querySelector("header");
+      if (window.scrollY > 1) {
+        header.classList.add("navbar-scrolled");
+      } else {
+        header.classList.remove("navbar-scrolled");
+      }
+    });
   </script>
 </html>
