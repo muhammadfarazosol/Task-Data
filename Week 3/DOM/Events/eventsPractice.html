@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Interactive Photo Gallery</title>
+    <style>
+      body {
+        background-color: #414141;
+        color: aliceblue;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        font-family: Arial, sans-serif;
+      }
+      h2 {
+        margin-top: 20px;
+      }
+      .gallery {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 20px;
+        justify-content: center;
+        margin-top: 20px;
+      }
+      .gallery img {
+        width: 200px;
+        cursor: pointer;
+        border: 2px solid #fff;
+        border-radius: 10px;
+      }
+      .model {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.8);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        display: none;
+      }
+      .model img {
+        width: 60%;
+        border: 2px solid #fff;
+        border-radius: 10px;
+      }
+      .model button {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        padding: 10px;
+        background: red;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
+    <h2>Interactive Photo Gallery</h2>
+    <div class="gallery">
+      <div class="gallery-item">
+        <img
+          src="https://images.pexels.com/photos/158063/bellingrath-gardens-alabama-landscape-scenic-158063.jpeg"
+          alt="Image 1"
+        />
+        <button class="remove-btn">Remove</button>
+      </div>
+      <div class="gallery-item">
+        <img
+          src="https://images.pexels.com/photos/3532553/pexels-photo-3532553.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load"
+          alt="Image 2"
+        />
+        <button class="remove-btn">Remove</button>
+      </div>
+      <div class="gallery-item">
+        <img
+          src="https://images.pexels.com/photos/3532551/pexels-photo-3532551.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load"
+          alt="Image 3"
+        />
+        <button class="remove-btn">Remove</button>
+      </div>
+      <div class="gallery-item">
+        <img
+          src="https://images.pexels.com/photos/3532552/pexels-photo-3532552.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load"
+          alt="Image 4"
+        />
+        <button class="remove-btn">Remove</button>
+      </div>
+      <div class="gallery-item">
+        <img
+          src="https://images.pexels.com/photos/2522671/pexels-photo-2522671.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load"
+          alt="Image 5"
+        />
+        <button class="remove-btn">Remove</button>
+      </div>
+    </div>
+
+    <div class="model">
+      <button id="close-model">Close</button>
+      <img src="" alt="Large View" />
+    </div>
+
+    <script>
+      // Selecting elements
+      const galleryItems = document.querySelectorAll(".gallery-item img");
+      const model = document.querySelector(".model");
+      const modelImg = document.querySelector(".model img");
+      const closeModelBtn = document.getElementById("close-model");
+      const removeButtons = document.querySelectorAll(".remove-btn");
+
+      // Function to open model
+      function openModel(e) {
+        model.style.display = "flex";
+        modelImg.src = e.target.src;
+      }
+
+      // Function to close model
+      function closeModel() {
+        model.style.display = "none";
+      }
+
+      // Function to handle keydown events
+      function handleKeydown(e) {
+        if (e.key === "Escape") {
+          closeModel();
+        }
+      }
+
+      // Function to remove gallery item
+      function removeItem(e) {
+        const itemToRemove = e.target.parentElement;
+        itemToRemove.remove();
+      }
+
+      // Event listeners for opening model
+      galleryItems.forEach((item) => {
+        item.addEventListener("click", openModel);
+      });
+
+      // Event listener for closing model
+      closeModelBtn.addEventListener("click", closeModel);
+      window.addEventListener("keydown", handleKeydown);
+      model.addEventListener("click", (e) => {
+        if (e.target === model) {
+          closeModel();
+        }
+      });
+
+      // Event listeners for removing items
+      removeButtons.forEach((button) => {
+        button.addEventListener("click", removeItem);
+      });
+    </script>
+  </body>
+</html>

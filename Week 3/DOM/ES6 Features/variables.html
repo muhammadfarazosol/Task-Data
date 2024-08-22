@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Let vs Const vs Var</title>
+  </head>
+  <body>
+    <button id="btn-var">Click Var</button>
+    <button id="btn-let">Click Let</button>
+    <button id="btn-const">Click Const</button>
+    <script>
+      // var example
+      document.getElementById("btn-var").addEventListener("click", () => {
+        for (var i = 0; i < 3; i++) {
+          setTimeout(() => {
+            console.log("var i:", i);
+          }, 1000);
+        }
+      });
+
+      // let example
+      document.getElementById("btn-let").addEventListener("click", () => {
+        for (let i = 0; i < 3; i++) {
+          setTimeout(() => {
+            console.log("let i:", i);
+          }, 1000);
+        }
+      });
+
+      // const example
+      document.getElementById("btn-const").addEventListener("click", () => {
+        const names = ["Alice", "Bob", "Charlie"];
+        names.forEach((name) => {
+          setTimeout(() => {
+            console.log("const name:", name);
+          }, 1000);
+        });
+      });
+    </script>
+  </body>
+</html>

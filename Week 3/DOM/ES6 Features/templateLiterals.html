@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  </head>
+  <body>
+    <h1>JavaScript Template Strings</h1>
+
+    <p id="p"></p>
+    <pre id="pre"></pre>
+
+    <script>
+      let text = `The quick
+brown fox
+jumps over
+the lazy dog`;
+
+      document.getElementById("pre").innerHTML = text;
+      let header = "Template Strings";
+      let tags = ["faraz", "faraz", "faraz"];
+
+      let html = `<h2>${header}</h2><ul>`;
+
+      for (const x of tags) {
+        html += `<li>${x}</li>`;
+      }
+
+      html += `</ul>`;
+      document.getElementById("p").innerHTML = html;
+    </script>
+  </body>
+</html>

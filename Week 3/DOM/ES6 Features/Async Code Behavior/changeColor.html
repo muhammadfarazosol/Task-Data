@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Unlimited Color Change</title>
+  </head>
+  <body style="background-color: #212121; color: #fff">
+    <h1>Start will change the Background color every second</h1>
+    <button id="start">Start</button>
+    <button id="stop">Stop</button>
+
+    <script>
+      const randomColor = () => {
+        const hex = "0123456789ABCDEF";
+        let color = "#";
+        for (let i = 0; i < 6; i++) {
+          color += hex[Math.floor(Math.random() * 16)];
+        }
+        return color;
+      };
+
+      let intervalId;
+
+      const startColor = () => {
+        const startChanging = () => {
+          document.body.style.backgroundColor = randomColor();
+        };
+        if (!intervalId) {
+          intervalId = setInterval(startChanging, 1000);
+        }
+      };
+      const stopColor = () => {
+        clearInterval(intervalId);
+        // best practice is when code is stopped we clear the interval id
+        intervalId = null; // now it will cause an ambiguity to solve this we will apply check in startColor that if it's empty then add colors into it
+      };
+
+      document.querySelector("#start").addEventListener("click", startColor);
+      document.querySelector("#stop").addEventListener("click", stopColor);
+    </script>
+  </body>
+</html>

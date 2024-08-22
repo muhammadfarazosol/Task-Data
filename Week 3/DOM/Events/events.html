@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>HTML DOM Events</title>
+  </head>
+  <body style="background-color: #414141; color: aliceblue">
+    <h2>Amazing image</h2>
+    <div>
+      <ul id="images">
+        <li>
+          <img
+            width="200px"
+            id="photoshop"
+            src="https://images.pexels.com/photos/158063/bellingrath-gardens-alabama-landscape-scenic-158063.jpeg"
+            alt="photoshop"
+          />
+        </li>
+        <li>
+          <img
+            width="200px"
+            id="japan"
+            src="https://images.pexels.com/photos/3532553/pexels-photo-3532553.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load"
+            alt=""
+          />
+        </li>
+        <li>
+          <img
+            width="200px"
+            id="river"
+            src="https://images.pexels.com/photos/3532551/pexels-photo-3532551.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load"
+            alt=""
+          />
+        </li>
+        <li>
+          <img
+            width="200px"
+            id="owl"
+            src="https://images.pexels.com/photos/3532552/pexels-photo-3532552.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load"
+            alt=""
+          />
+        </li>
+        <!-- <li>
+          <img
+            width="200px"
+            id="prayer"
+            src="https://images.pexels.com/photos/2522671/pexels-photo-2522671.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load"
+            alt=""
+            onclick="alert('prayer image')" // 1st approach - not a good approach while working on pure JS in react we can use as it has more stable code 
+          />
+        </li> -->
+        <li>
+          <img
+            width="200px"
+            id="prayer"
+            src="https://images.pexels.com/photos/2522671/pexels-photo-2522671.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load"
+            alt=""
+          />
+        </li>
+        <li style="text-align: center; padding: 40px">
+          <a style="color: aliceblue" href="https://google.com" id="google"
+            ><button
+              style="padding: 20px; border-radius: 10px; cursor: pointer"
+            >
+              Google
+            </button></a
+          >
+        </li>
+      </ul>
+    </div>
+  </body>
+  <script>
+    // 1st aprroach simply apply directly onclick on any tag as above
+
+    // 2nd approach
+    // document.getElementById("prayer").onclick = () => {
+    //   alert("prayer image");
+    // }; // it is also not a good approach as we do not get much information i.e. less approach from onclick so we must use event listener as they provide us propagation ability
+
+    // 3rd approach
+    // document.getElementById('prayer').addEventListener('click', ()=> {}, false) // 1st argument is click which defines the event there are many more events like mouse events keyboard events drag and drop events etc, 2nd one is a function what event should perfrom and 3rd one is by default false no need to mention but some applications required it to be true then we have to mention that it's true else by default is false
+
+    // document.getElementById("prayer").addEventListener("click", () => {
+    //   alert("Prayer image");
+    // });
+
+    // some other approaches are there as well but used way back like
+    // attachEvent() usually used to run applications in internet explorer when it was difficult to run not used now as much
+    // jQuery - on  // used as such .on to run similar tasks
+
+    // document.getElementById("prayer").addEventListener("click", (e) => {
+    // e = event objects // now mostly we get browser and environment events that like PointerEvent widht height timeStamps and many more
+    // console.log(e);
+    // });
+    // Some imp events we should know about
+    // type -> mouse and keyboard events, timestamp, preventDefault
+    // imp for interviews -> target, toElement, srcElement, currentTarget,
+    // clientX, clientY, screenX, screenY
+    // altkey, ctrlkey, shiftkey, keyCode -> different keyCode for like A B C to check whether these keys are pressed or not like that
+
+    // Events Propogation i.e. the 3rd argument which is by default false whether we mention it or not
+    // Now it happens in two ways
+
+    // 1- Event Bubbling (false)
+    // document.getElementById("prayer").addEventListener(
+    //   "click",
+    //   () => {
+    //     alert("Prayer image");
+    //   },
+    //   false
+    // );
+
+    // 2- Event Capturing (true)
+    // document.getElementById("prayer").addEventListener(
+    //   "click",
+    //   () => {
+    //     alert("Prayer image");
+    //   },
+    //   true
+    // );
+
+    // -> Event Bubbling Concept
+
+    // document.getElementById("images").addEventListener(
+    //   "click",
+    //   () => {
+    //     console.log("Whole ul Clicked");
+    //   },
+    //   false // no issue if you not mention false because it is by default
+    // );
+
+    // document.getElementById("prayer").addEventListener(
+    //   "click",
+    //   () => {
+    //     console.log("Image inside ul > li clicked");
+    //   },
+    //   false
+    // );
+    // ok now here's how the above code work is that any image when clicked gives "whole ul clicked"
+    // but what will happen when prayer id image is clicked because it also inside the ul
+    // now this is the concept of event bubbling i.e. from inside to the outside i.e. bottom to top
+    // it will print both values but first "Image inside ul > li clicked" and then "Whole ul Clicked"
+
+    // -> Event Capturing Concept
+    // document.getElementById("images").addEventListener(
+    //   "click",
+    //   () => {
+    //     console.log("Whole ul Clicked");
+    //   },
+    //   true
+    // );
+
+    // document.getElementById("prayer").addEventListener(
+    //   "click",
+    //   () => {
+    //     console.log("Image inside ul > li clicked");
+    //   },
+    //   true
+    // );
+    // ok so vice versa happens in event capturing i.e. outside to inside i.e. top to bottom
+    // it will print both values but first "Whole ul Clicked" and then "Image inside ul > li clicked"
+
+    // Now what if we want to keep out inner and outer element separate i.e. not creating bubbling -> to stop them passing
+    // to do that we have stopPropagation() method
+    // document.getElementById("images").addEventListener(
+    //   "click",
+    //   () => {
+    //     console.log("Whole ul Clicked");
+    //   },
+    //   false
+    // );
+
+    // document.getElementById("prayer").addEventListener(
+    //   "click",
+    //   (e) => {
+    //     console.log("Image inside ul > li clicked");
+    //     e.stopPropagation();
+    //   },
+    //   false
+    // );
+
+    // Usage of preventDefault() to prevent a tag to stop using it's default behavior
+    // document.getElementById("google").addEventListener("click", (e) => {
+    //   console.log("google clicked");
+    //   e.preventDefault();
+    //   e.stopPropagation();
+    // });
+
+    // now let's take an scenario and remove a list whenever it is clicked
+    // document.querySelector("#images").addEventListener("click", (e) => {
+    //   console.log(e.target.parentNode);
+    //   const removeIt = e.target.parentNode;
+    //   removeIt.remove();
+    // another method to remove images is
+    // removeIt.parentNode.removeChild(removeIt); // it means removeIt ka parent node ha i.e. ul uska child remove krdein i.e. removeIt has li
+    // });
+    // now above method causes an irregularity i.e. whenever a list is clicked rather than image whole list is removed we can fix this
+
+    // solution to avoid events spill over
+    document.querySelector("#images").addEventListener("click", (e) => {
+      console.log(e.target.tagName);
+      if (e.target.tagName === "IMG") {
+        const removeIt = e.target.parentNode;
+        removeIt.remove();
+      }
+    });
+  </script>
+</html>
